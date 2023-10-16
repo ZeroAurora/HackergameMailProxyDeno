@@ -7,7 +7,7 @@ Requires a recent version of [Deno](https://deno.com/) and [Redis](https://redis
 Fill in `.env`, and simply do:
 
 ```sh
-deno run -A main.ts
+deno run -A src/main.ts
 ```
 
 ## License
