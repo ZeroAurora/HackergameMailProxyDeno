@@ -1,7 +1,7 @@
 {
   "imports": {
     "denomailer": "https://deno.land/x/denomailer@1.6.0/mod.ts",
-    "redis": "https://deno.land/x/redis@v0.31.0/mod.ts",
+    "redis": "npm:redis@4.6.10",
     "std/encoding/hex": "https://deno.land/std@0.204.0/encoding/hex.ts",
     "std/dotenv": "https://deno.land/std@0.204.0/dotenv/mod.ts"
   }
