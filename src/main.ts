@@ -23,7 +23,7 @@ async function handle(req: Request) {
       resp = {
         json: {
           success: true,
-          message: "OK",
+          msg: "OK",
         },
         status: 200,
       };
@@ -33,7 +33,7 @@ async function handle(req: Request) {
       resp = {
         json: {
           success: false,
-          message:
+          msg:
             "邮件地址无效，仅支持 stu.xidian.edu.cn 域名的 11 位学号邮箱，别名邮箱暂不支持。",
         },
         status: 200,
@@ -44,7 +44,7 @@ async function handle(req: Request) {
       resp = {
         json: {
           success: false,
-          message: "超过每小时每 IP 最大发送限制，请稍后再试。",
+          msg: "超过每小时每 IP 最大发送限制，请稍后再试。",
         },
         status: 200,
       };
@@ -54,7 +54,7 @@ async function handle(req: Request) {
       resp = {
         json: {
           success: false,
-          message: "超过每小时每邮箱最大发送限制，请稍后再试。",
+          msg: "超过每小时每邮箱最大发送限制，请稍后再试。",
         },
         status: 200,
       };
@@ -64,7 +64,7 @@ async function handle(req: Request) {
       resp = {
         json: {
           success: false,
-          message: "发送失败，请联系西电方面管理员。",
+          msg: "发送失败，请联系西电方面管理员。",
         },
         status: 200,
       };
@@ -74,7 +74,7 @@ async function handle(req: Request) {
       resp = {
         json: {
           success: false,
-          message: "未知错误。",
+          msg: "未知错误。",
         },
         status: 500,
       };

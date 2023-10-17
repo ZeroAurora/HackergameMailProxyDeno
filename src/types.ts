@@ -9,7 +9,7 @@ export interface IHGMailRequest {
 
 interface IHGResponseJSON {
   success: boolean;
-  message: string;
+  msg: string;
 }
 
 export interface IHGResponse {
