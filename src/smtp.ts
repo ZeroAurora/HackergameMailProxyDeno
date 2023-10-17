@@ -5,10 +5,6 @@ import { checkTraffic, storeTraffic } from "./redis.ts";
 
 // email client config
 const smtpConfig: ClientOptions = {
-  debug: {
-    allowUnsecure: true,
-    noStartTLS: true,
-  },
   connection: {
     hostname: env.SMTP_HOST,
     port: Number(env.SMTP_PORT),
@@ -16,6 +12,7 @@ const smtpConfig: ClientOptions = {
       username: env.SMTP_USERNAME,
       password: env.SMTP_PASSWORD,
     },
+    tls: true,
   },
 };
 
