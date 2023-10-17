@@ -10,7 +10,7 @@ Fill in `.env`, and simply do:
 deno run -A src/main.ts
 ```
 
-It's easy. But for the safety of your life, don't use Deno in your project.
+It's easy. But for the safety of your life, **don't use Deno in your project**.
 
 At lease check for library compability and usability.
 
