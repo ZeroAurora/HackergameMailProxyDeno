@@ -17,7 +17,7 @@ export async function storeTraffic(mail: IHGMailRequest) {
   await redis.setEx(`mails:by-email:${mail.to}:${contentHash}`, 60 * 60, "1");
 
   await redis.disconnect();
-  console.log(`[REDIS|TRAFFIC] Stored traffic for ${mail.to} (${mail.ip})`);
+  console.log(`[TRAFFIC] Stored traffic for ${mail.to} (${mail.ip})`);
 }
 
 export async function checkTraffic(mail: IHGMailRequest) {
@@ -27,12 +27,13 @@ export async function checkTraffic(mail: IHGMailRequest) {
   await redis.disconnect();
 
   if (countByIP > Number(env.IP_LIMIT)) {
-    console.log(`[REDIS|TRAFFIC] IP limit exceeded for ${mail.ip}`);
+    console.log(`[TRAFFIC] IP limit exceeded for ${mail.ip}`);
     return SendMailStatus.IP_LIMIT_EXCEEDED;
   }
   if (countByEmail > Number(env.EMAIL_LIMIT)) {
-    console.log(`[REDIS|TRAFFIC] Email limit exceeded for ${mail.to}`);
+    console.log(`[TRAFFIC] Email limit exceeded for ${mail.to}`);
     return SendMailStatus.EMAIL_LIMIT_EXCEEDED;
   }
+  console.log(`[TRAFFIC] Traffic check passed for ${mail.to} (${mail.ip})`);
   return SendMailStatus._LIMIT_CHECKED;
 }
