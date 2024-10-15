@@ -1,20 +1,25 @@
-import { ClientOptions, SMTPClient } from "denomailer";
+// @deno-types="@types/nodemailer"
+import { createTransport } from "nodemailer";
 import { env } from "./env.ts";
 import { IHGMailRequest, SendMailStatus } from "./types.ts";
 import { checkTraffic, storeTraffic } from "./redis.ts";
 
 // email client config
-const smtpConfig: ClientOptions = {
-  connection: {
-    hostname: env.SMTP_HOST,
-    port: Number(env.SMTP_PORT),
-    auth: {
-      username: env.SMTP_USERNAME,
-      password: env.SMTP_PASSWORD,
-    },
-    tls: true,
+const option = {
+  host: env.SMTP_HOST,
+  port: Number(env.SMTP_PORT),
+  auth: {
+    user: env.SMTP_USERNAME,
+    pass: env.SMTP_PASSWORD,
   },
+  secure: false,
 };
+
+const transport = createTransport(option);
+
+globalThis.addEventListener("beforeunload", () => {
+  transport.close();
+});
 
 // email validation
 function validateEmail(email: string) {
@@ -35,14 +40,12 @@ export async function sendMail(mail: IHGMailRequest): Promise<SendMailStatus> {
     return trafficCheckResult;
   }
 
-  let smtp: SMTPClient | undefined;
   try {
-    smtp = new SMTPClient(smtpConfig);
-    await smtp.send({
+    await transport.sendMail({
       from: env.SMTP_USERNAME,
       to,
       subject,
-      content: body,
+      text: body,
     });
     console.debug(`[SMTP] Sent mail to ${to}`);
     await storeTraffic(mail);
@@ -50,7 +53,5 @@ export async function sendMail(mail: IHGMailRequest): Promise<SendMailStatus> {
   } catch (e) {
     console.error(e);
     return SendMailStatus.SERVER_ERROR;
-  } finally {
-    await smtp?.close();
   }
 }

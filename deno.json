@@ -1,8 +1,9 @@
 {
   "imports": {
-    "denomailer": "https://deno.land/x/denomailer@1.6.0/mod.ts",
-    "redis": "npm:redis@4.6.10",
-    "std/encoding/hex": "https://deno.land/std@0.204.0/encoding/hex.ts",
-    "std/dotenv": "https://deno.land/std@0.204.0/dotenv/mod.ts"
+    "@std/dotenv": "jsr:@std/dotenv@^0.225.2",
+    "@std/encoding": "jsr:@std/encoding@^1.0.5",
+    "@types/nodemailer": "npm:@types/nodemailer@^6.4.16",
+    "nodemailer": "npm:nodemailer@^6.9.15",
+    "redis": "npm:redis@^4.7.0"
   }
 }

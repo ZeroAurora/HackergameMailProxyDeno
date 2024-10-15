@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   app:
     build: .
@@ -10,5 +10,5 @@ services:
       - redis
     restart: unless-stopped
   redis:
-    image: redis
+    image: valkey/valkey:8.0.1-alpine
     restart: unless-stopped
