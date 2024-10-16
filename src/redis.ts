@@ -24,10 +24,8 @@ export async function storeTraffic(mail: IHGMailRequest) {
 }
 
 export async function checkTraffic(mail: IHGMailRequest) {
-  const redis = await client.connect();
   const countByIP = (await redis.keys(`mails:by-ip:${mail.ip}:*`)).length;
   const countByEmail = (await redis.keys(`mails:by-email:${mail.to}:*`)).length;
-  await redis.disconnect();
 
   if (countByIP > Number(env.IP_LIMIT)) {
     console.log(`[TRAFFIC] IP limit exceeded for ${mail.ip}`);
