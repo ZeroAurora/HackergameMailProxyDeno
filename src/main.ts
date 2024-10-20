@@ -80,7 +80,6 @@ async function handle(req: Request) {
       };
     }
   }
-  console.debug(resp);
   return new Response(JSON.stringify(resp.json), {
     status: resp.status,
   });
